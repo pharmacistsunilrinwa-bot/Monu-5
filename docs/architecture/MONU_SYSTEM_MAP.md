@@ -1,0 +1,55 @@
+# MONU AI COMPLETE SYSTEM MAP
+
+OWNER
+  |
+  v
+MAIN DASHBOARD
+  |
+  v
+CENTRAL AI BRAIN
+  |
+  +-------------------+
+  |                   |
+  v                   v
+EXECUTION PLAN     MEMORY CONTEXT
+  |
+  v
+QUAD ROUTER
+  |
+  +--> LOCAL DATABASE
+  |
+  +--> MONU SERVER
+  |
+  +--> GEMINI PROVIDER
+  |
+  +--> WIKIPEDIA
+
+BACKGROUND SYSTEM
+  |
+  +--> FOREGROUND SERVICE
+  |
+  +--> VOICE SESSION
+  |
+  +--> WAKE WORD DETECTOR
+  |
+  +--> COMMAND ROUTER
+  |
+  +--> HEALTH ENGINE
+  |
+  +--> DIAGNOSTICS
+
+MEDIA SYSTEM
+  |
+  +--> FILE PICKER
+  +--> PHOTO PICKER
+  +--> CAMERA
+  +--> CHUNK STREAMER
+  +--> DOWNLOAD MANAGER
+
+SECURITY
+  |
+  +--> GITHUB SECRETS
+  +--> BUILD CONFIG
+  +--> PROGUARD
+  +--> RUNTIME PERMISSIONS
+  +--> CRASH LOGGING
