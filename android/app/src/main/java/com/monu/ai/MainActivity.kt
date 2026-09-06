@@ -515,7 +515,9 @@ fun MessageBubble(
                 TextButton(
                     onClick = {
 
-                        val tts =
+                        var tts: TextToSpeech? = null
+
+                        tts =
                             TextToSpeech(
                                 context
                             ) { status ->
@@ -525,7 +527,7 @@ fun MessageBubble(
                                     TextToSpeech.SUCCESS
                                 ) {
 
-                                    tts.speak(
+                                    tts?.speak(
                                         message.content,
                                         TextToSpeech.QUEUE_FLUSH,
                                         null,

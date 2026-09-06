@@ -1,5 +1,7 @@
 package com.monu.ai.brain
 
+import kotlinx.coroutines.flow.first
+
 import com.monu.ai.MonuRepository
 
 class MonuMemoryContext(
@@ -17,9 +19,9 @@ class MonuMemoryContext(
         return try {
 
             val messages =
-                repository.getMessages(
+                repository.messages(
                     conversationId
-                )
+                ).first()
 
             messages
                 .takeLast(20)

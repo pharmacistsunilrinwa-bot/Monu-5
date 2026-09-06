@@ -37,7 +37,7 @@ class MonuFeatureIntegration(
         }
 
         return try {
-            val decision = brain.process(input)
+            val decision = brain.decide(input)
 
             IntegrationResult(
                 success = true,

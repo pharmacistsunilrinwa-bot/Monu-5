@@ -41,11 +41,8 @@ class MonuAiOrchestrator(
         return try {
 
             val gatewayResponse =
-                aiGateway.ask(
-                    message =
-                        request.message,
-                    preferredModel =
-                        request.preferredModel
+                aiGateway.process(
+                    message = request.message
                 )
 
             val latency =
@@ -59,7 +56,7 @@ class MonuAiOrchestrator(
                             "AI_GATEWAY",
                         success = true,
                         content =
-                            gatewayResponse,
+                            gatewayResponse.primaryResponse,
                         latencyMs =
                             latency
                     )

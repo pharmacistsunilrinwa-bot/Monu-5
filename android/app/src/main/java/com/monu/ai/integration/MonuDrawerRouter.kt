@@ -66,12 +66,12 @@ object MonuDrawerRouter {
 
             "timeline" ->
                 MonuNavigationController.navigate(
-                    MonuAppRoute.Timeline
+                    MonuAppRoute.Archive
                 )
 
             "backup" ->
                 MonuNavigationController.navigate(
-                    MonuAppRoute.Backup
+                    MonuAppRoute.Archive
                 )
 
             "privacy" ->

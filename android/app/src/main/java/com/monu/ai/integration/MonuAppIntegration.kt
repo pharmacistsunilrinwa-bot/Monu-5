@@ -49,10 +49,10 @@ object MonuAppIntegration {
                 MonuAppRoute.Search
 
             "timeline" ->
-                MonuAppRoute.Timeline
+                MonuAppRoute.Archive
 
             "backup" ->
-                MonuAppRoute.Backup
+                MonuAppRoute.Archive
 
             "privacy" ->
                 MonuAppRoute.Privacy
