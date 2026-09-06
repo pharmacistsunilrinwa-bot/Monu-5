@@ -28,7 +28,7 @@ object MonuAppIntegration {
                 MonuAppRoute.Connection
 
             "models" ->
-                MonuAppRoute.Models
+                MonuAppRoute.ModelSelector
 
             "settings" ->
                 MonuAppRoute.Settings

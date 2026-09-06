@@ -31,7 +31,7 @@ object MonuDrawerRouter {
 
             "models" ->
                 MonuNavigationController.navigate(
-                    MonuAppRoute.Models
+                    MonuAppRoute.ModelSelector
                 )
 
             "settings" ->

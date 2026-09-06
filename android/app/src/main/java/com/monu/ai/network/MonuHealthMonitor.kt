@@ -27,7 +27,7 @@ class MonuHealthMonitor(
         val diagnostic =
             when {
 
-                MonuNetworkConfig.MONU_SERVER_URL.isBlank() ->
+                com.monu.ai.BuildConfig.MONU_SERVER_URL.isBlank() ->
                     "MONU Server URL is not configured."
 
                 !result.connected ->
