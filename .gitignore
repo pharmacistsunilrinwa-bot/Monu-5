@@ -1,0 +1,16 @@
+.env
+.env.*
+*.key
+*.keystore
+*.jks
+*.pem
+*.db
+*.sqlite
+*.log
+__pycache__/
+*.pyc
+.gradle/
+build/
+local.properties
+server/data/
+server/logs/
