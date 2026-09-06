@@ -25,6 +25,7 @@
     <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
+        android:name=".MonuApplication"
         android:allowBackup="true"
         android:enableOnBackInvokedCallback="true"
         android:label="MONU AI"
@@ -41,6 +42,28 @@
             </intent-filter>
 
         </activity>
+
+    
+        <service
+            android:name=".services.MonuForegroundService"
+            android:exported="false"
+            android:foregroundServiceType="microphone" />
+
+        <service
+            android:name=".services.MonuVoiceSessionService"
+            android:exported="false"
+            android:foregroundServiceType="microphone" />
+
+    
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/monu_file_paths" />
+        </provider>
 
     </application>
 

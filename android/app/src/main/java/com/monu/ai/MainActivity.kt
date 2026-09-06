@@ -34,6 +34,11 @@ class MainActivity : ComponentActivity() {
     ) {
         super.onCreate(savedInstanceState)
 
+        try {
+            MonuRuntimeController.startCoreServices(this)
+        } catch (_: Exception) {
+        }
+
         setContent {
 
             MaterialTheme {
