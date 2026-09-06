@@ -1,0 +1,12 @@
+<resources>
+    <string name="monu_app_name">MONU AI</string>
+    <string name="monu_owner">Sunil Rinwa</string>
+    <string name="monu_version_label">Production</string>
+    <string name="monu_description">Personal AI assistant powered by a central AI brain.</string>
+
+    <bool name="monu_production_mode">true</bool>
+    <bool name="monu_crash_logging_enabled">true</bool>
+    <bool name="monu_offline_mode_enabled">true</bool>
+    <bool name="monu_voice_enabled">true</bool>
+    <bool name="monu_memory_enabled">true</bool>
+</resources>
