@@ -26,3 +26,10 @@ config/secrets/local.properties
 android/local.properties
 *.keystore
 *.jks
+
+# MONU production secrets - NEVER COMMIT
+config/secrets/local.properties
+config/secrets/*.key
+config/secrets/*.dat
+*.keystore
+*.jks

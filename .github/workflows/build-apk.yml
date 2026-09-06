@@ -1,0 +1,70 @@
+name: Build MONU APK
+
+on:
+  push:
+    branches:
+      - master
+      - main
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Build MONU Android APK
+    runs-on: ubuntu-latest
+
+    env:
+      MONU_GEMINI_API_KEY: ${{ secrets.MONU_GEMINI_API_KEY }}
+      MONU_SERVER_URL: ${{ secrets.MONU_SERVER_URL }}
+
+    steps:
+
+      - name: Checkout MONU Source
+        uses: actions/checkout@v4
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v4
+
+      - name: Verify Secret Availability
+        shell: bash
+        run: |
+          if [ -z "$MONU_GEMINI_API_KEY" ]; then
+            echo "ERROR: MONU_GEMINI_API_KEY GitHub Secret is missing"
+            exit 1
+          fi
+
+          echo "MONU_GEMINI_API_KEY is available to Gradle"
+          echo "MONU_SERVER_URL configuration checked"
+
+      - name: Build Debug APK
+        working-directory: android
+        run: |
+          gradle wrapper
+          ./gradlew :app:assembleDebug --stacktrace
+
+      - name: Build Release APK
+        working-directory: android
+        run: |
+          ./gradlew :app:assembleRelease --stacktrace
+
+      - name: Upload Debug APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: MONU-debug-apk
+          path: android/app/build/outputs/apk/debug/*.apk
+          if-no-files-found: error
+
+      - name: Upload Release APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: MONU-release-apk
+          path: android/app/build/outputs/apk/release/*.apk
+          if-no-files-found: error
