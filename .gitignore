@@ -14,3 +14,9 @@ build/
 local.properties
 server/data/
 server/logs/
+
+# MONU private secrets
+android/app/src/main/assets/monu/*
+!android/app/src/main/assets/monu/.gitkeep
+*.secret
+*.dat
