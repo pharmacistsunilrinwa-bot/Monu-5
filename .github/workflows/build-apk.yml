@@ -1,15 +1,17 @@
-name: Build MONU APK
+name: Build MONU Real APK
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - master
-      - main
-  workflow_dispatch:
+
+permissions:
+  contents: read
 
 jobs:
   build:
-    name: Build MONU Android APK
+    name: Build Production APK
     runs-on: ubuntu-latest
 
     env:
@@ -17,15 +19,14 @@ jobs:
       MONU_SERVER_URL: ${{ secrets.MONU_SERVER_URL }}
 
     steps:
-
-      - name: Checkout MONU Source
+      - name: Checkout source
         uses: actions/checkout@v4
 
       - name: Setup Java
         uses: actions/setup-java@v4
         with:
           distribution: temurin
-          java-version: '21'
+          java-version: '17'
 
       - name: Setup Android SDK
         uses: android-actions/setup-android@v3
@@ -33,38 +34,52 @@ jobs:
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v4
 
-      - name: Verify Secret Availability
+      - name: Validate required AI secret
         shell: bash
         run: |
           if [ -z "$MONU_GEMINI_API_KEY" ]; then
-            echo "ERROR: MONU_GEMINI_API_KEY GitHub Secret is missing"
+            echo "ERROR: MONU_GEMINI_API_KEY GitHub Secret is missing."
             exit 1
           fi
+          echo "Gemini secret detected."
 
-          echo "MONU_GEMINI_API_KEY is available to Gradle"
-          echo "MONU_SERVER_URL configuration checked"
+      - name: Generate local.properties
+        shell: bash
+        run: |
+          cat > android/local.properties <<EOF
+          sdk.dir=$ANDROID_HOME
+          MONU_GEMINI_API_KEY=$MONU_GEMINI_API_KEY
+          MONU_SERVER_URL=$MONU_SERVER_URL
+          EOF
+
+      - name: Inspect Android project
+        working-directory: android
+        run: |
+          echo "Android project:"
+          find . -maxdepth 3 -type f | sort
 
       - name: Build Debug APK
         working-directory: android
         run: |
-          gradle wrapper
-          ./gradlew :app:assembleDebug --stacktrace
-
-      - name: Build Release APK
-        working-directory: android
-        run: |
-          ./gradlew :app:assembleRelease --stacktrace
+          gradle --no-daemon assembleDebug
 
       - name: Upload Debug APK
         uses: actions/upload-artifact@v4
         with:
-          name: MONU-debug-apk
+          name: MONU-Debug-APK
           path: android/app/build/outputs/apk/debug/*.apk
           if-no-files-found: error
+          retention-days: 30
+
+      - name: Build Release APK
+        working-directory: android
+        run: |
+          gradle --no-daemon assembleRelease
 
       - name: Upload Release APK
         uses: actions/upload-artifact@v4
         with:
-          name: MONU-release-apk
+          name: MONU-Release-APK
           path: android/app/build/outputs/apk/release/*.apk
           if-no-files-found: error
+          retention-days: 30
