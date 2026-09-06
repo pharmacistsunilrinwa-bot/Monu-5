@@ -1,0 +1,7 @@
+# LOCAL EXAMPLE ONLY
+# Do NOT commit real passwords or private keys.
+
+STORE_FILE=monu-release.jks
+STORE_PASSWORD=CHANGE_ME
+KEY_ALIAS=monu
+KEY_PASSWORD=CHANGE_ME
