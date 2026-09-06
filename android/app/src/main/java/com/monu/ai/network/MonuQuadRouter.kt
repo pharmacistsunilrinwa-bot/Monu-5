@@ -14,7 +14,7 @@ class MonuQuadRouter(
         MonuNetworkEngine(context)
 
     private val gemini =
-        GeminiProvider(context)
+        GeminiProvider()
 
     suspend fun route(
         message: String,

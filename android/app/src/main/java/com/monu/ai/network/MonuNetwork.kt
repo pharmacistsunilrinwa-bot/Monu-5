@@ -30,11 +30,7 @@ data class QuadRouteResult(
 )
 
 object MonuNetworkConfig {
-    /*
-     * Set MONU_SERVER_URL later through secure configuration.
-     * Empty value means server route is not configured.
-     */
-    const val MONU_SERVER_URL = ""
+    const val DEFAULT_TIMEOUT_MS = 15_000
 }
 
 class MonuNetworkEngine(
@@ -60,7 +56,7 @@ class MonuNetworkEngine(
     suspend fun checkServerConnection(): ConnectionResult =
         withContext(Dispatchers.IO) {
 
-            if (MonuNetworkConfig.MONU_SERVER_URL.isBlank()) {
+            if (com.monu.ai.BuildConfig.MONU_SERVER_URL.isBlank()) {
                 return@withContext ConnectionResult(
                     connected = false,
                     latencyMs = null,
@@ -73,7 +69,7 @@ class MonuNetworkEngine(
             try {
                 val connection =
                     URL(
-                        MonuNetworkConfig.MONU_SERVER_URL
+                        com.monu.ai.BuildConfig.MONU_SERVER_URL
                             .trimEnd('/') + "/health"
                     )
                         .openConnection() as HttpURLConnection
@@ -185,7 +181,7 @@ class MonuNetworkEngine(
     ): RouteResult =
         withContext(Dispatchers.IO) {
 
-            if (MonuNetworkConfig.MONU_SERVER_URL.isBlank()) {
+            if (com.monu.ai.BuildConfig.MONU_SERVER_URL.isBlank()) {
 
                 return@withContext RouteResult(
                     route = "monu_server",
@@ -202,7 +198,7 @@ class MonuNetworkEngine(
 
                 val connection =
                     URL(
-                        MonuNetworkConfig.MONU_SERVER_URL
+                        com.monu.ai.BuildConfig.MONU_SERVER_URL
                             .trimEnd('/') + "/chat"
                     )
                         .openConnection() as HttpURLConnection

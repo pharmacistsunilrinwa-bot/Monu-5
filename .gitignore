@@ -20,3 +20,9 @@ android/app/src/main/assets/monu/*
 !android/app/src/main/assets/monu/.gitkeep
 *.secret
 *.dat
+
+# MONU private secrets
+config/secrets/local.properties
+android/local.properties
+*.keystore
+*.jks

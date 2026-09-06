@@ -1,3 +1,22 @@
+import java.util.Properties
+
+val monuSecrets = Properties()
+val monuSecretsFile = rootProject.file("../config/secrets/local.properties")
+
+if (monuSecretsFile.exists()) {
+    monuSecretsFile.inputStream().use { monuSecrets.load(it) }
+}
+
+val monuGeminiApiKey =
+    System.getenv("MONU_GEMINI_API_KEY")
+        ?: monuSecrets.getProperty("MONU_GEMINI_API_KEY")
+        ?: ""
+
+val monuServerUrl =
+    System.getenv("MONU_SERVER_URL")
+        ?: monuSecrets.getProperty("MONU_SERVER_URL")
+        ?: ""
+
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
@@ -10,6 +29,18 @@ android {
     compileSdk = 36
 
     defaultConfig {
+        buildConfigField(
+            "String",
+            "MONU_GEMINI_API_KEY",
+            "\"${monuGeminiApiKey}\""
+        )
+
+        buildConfigField(
+            "String",
+            "MONU_SERVER_URL",
+            "\"${monuServerUrl}\""
+        )
+
         applicationId = "com.monu.ai"
         minSdk = 26
         targetSdk = 36
