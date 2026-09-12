@@ -1,5 +1,7 @@
 package com.monu.ai
 
+import android.util.Log
+
 import android.content.Context
 import android.content.Intent
 import androidx.core.content.ContextCompat
@@ -23,7 +25,8 @@ object MonuRuntimeController {
                 context,
                 intent
             )
-        } catch (_: Exception) {
+        } catch (e: Exception) {
+            Log.e("MonuRuntimeController", "startCoreServices failed", e)
         }
     }
 
@@ -40,7 +43,8 @@ object MonuRuntimeController {
             }
 
             context.startService(intent)
-        } catch (_: Exception) {
+        } catch (e: Exception) {
+            Log.e("MonuRuntimeController", "stopCoreServices failed", e)
         }
     }
 }

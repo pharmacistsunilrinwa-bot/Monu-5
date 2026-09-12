@@ -2,6 +2,8 @@
 
 package com.monu.ai
 
+import android.util.Log
+
 import android.content.Intent
 import android.os.Bundle
 import android.speech.tts.TextToSpeech
@@ -38,7 +40,8 @@ class MainActivity : ComponentActivity() {
 
         try {
             MonuRuntimeController.startCoreServices(this)
-        } catch (_: Exception) {
+        } catch (e: Exception) {
+            Log.e("MainActivity", "MonuRuntimeController.startCoreServices failed", e)
         }
 
         setContent {
